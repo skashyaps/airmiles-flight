@@ -9,7 +9,9 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 import com.airmiles.core.base.BaseTest;
 import com.airmiles.core.util.Xls_Reader;
@@ -167,10 +169,26 @@ public class Book extends BaseTest {
 					.click();
 				}
 			driver.findElementByXPath("//a[text()='"+ retDay +"']").click();
-			
-			
-			}
+				}
 		
+			WebElement dreamAdult = driver.findElementByXPath("//select[@id='round_trip_adult_reward_tickets']");
+			Select d = new Select (dreamAdult);
+			d.selectByValue("0");
+			
+			String adult = datatable.getCellData("Data", "Adult", i).trim().substring(0, 1);
+			System.out.println("Number of adults are " + adult);
+			
+			WebElement adultDropdown = driver.findElementByXPath(prop.getProperty("adult_xpath"));
+			Select s = new Select (adultDropdown);
+			s.selectByValue(adult);
+			
+			String child = datatable.getCellData("Data", "Child", i).trim().substring(0, 1);
+			System.out.println("Number of children are " + child);
+			
+			WebElement childDropdown = driver.findElementByXPath(prop.getProperty("child_xpath"));
+			Select ch = new Select (childDropdown);
+			ch.selectByValue(child);
+			
 			Thread.sleep(5000);
 
 			 driver.quit();
