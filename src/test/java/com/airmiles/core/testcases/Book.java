@@ -91,18 +91,17 @@ public class Book extends BaseTest {
 
 			// Split the return day,month and year
 			String retDay = null, retMon = null, retYear = null;
-			int retMonth= 0, rClicks = 0;
+			int retMonth = 0, rClicks = 0;
 			if (!returnDate.isEmpty()) {
 				String[] rparts = returnDate.split("/");
 				retDay = rparts[0];
 				System.out.println("Return Date is  " + retDay);
-				 retMon = rparts[1];
+				retMon = rparts[1];
 				System.out.println("Return Month is  " + retMon);
-			    retYear = rparts[2];
+				retYear = rparts[2];
 				System.out.println("Return year is " + retYear);
 
-				 rClicks = Integer.parseInt(retMon)
-						- Integer.parseInt(depMon);
+				rClicks = Integer.parseInt(retMon) - Integer.parseInt(depMon);
 				System.out.println("Number of return clicks required is "
 						+ rClicks);
 
@@ -157,51 +156,55 @@ public class Book extends BaseTest {
 						.click();
 			}
 
-			// Selecting the departure date 
-			
-			driver.findElementByXPath("//a[text()='"+ depDay +"']").click();
-			
-			// Selecting return date 
-			if (tripType.equalsIgnoreCase("Round Trip")){
-				driver.findElementByXPath(prop.getProperty("retdate_xpath")).click();
-				for (int ret=1 ; ret<=rClicks; ret++){
+			// Selecting the departure date
+
+			driver.findElementByXPath("//a[text()='" + depDay + "']").click();
+
+			// Selecting return date
+			if (tripType.equalsIgnoreCase("Round Trip")) {
+				driver.findElementByXPath(prop.getProperty("retdate_xpath"))
+						.click();
+				for (int ret = 1; ret <= rClicks; ret++) {
 					driver.findElementByXPath(prop.getProperty("click_xpath"))
-					.click();
+							.click();
 				}
-			driver.findElementByXPath("//a[text()='"+ retDay +"']").click();
-				}
-		
-			WebElement dreamAdult = driver.findElementByXPath("//select[@id='round_trip_adult_reward_tickets']");
-			Select d = new Select (dreamAdult);
+				driver.findElementByXPath("//a[text()='" + retDay + "']")
+						.click();
+			}
+
+			WebElement dreamAdult = driver
+					.findElementByXPath("//select[@id='round_trip_adult_reward_tickets']");
+			Select d = new Select(dreamAdult);
 			d.selectByValue("0");
-			
-			String adult = datatable.getCellData("Data", "Adult", i).trim().substring(0, 1);
+
+			String adult = datatable.getCellData("Data", "Adult", i).trim()
+					.substring(0, 1);
 			System.out.println("Number of adults are " + adult);
-			
-			WebElement adultDropdown = driver.findElementByXPath(prop.getProperty("adult_xpath"));
-			Select s = new Select (adultDropdown);
+
+			WebElement adultDropdown = driver.findElementByXPath(prop
+					.getProperty("adult_xpath"));
+			Select s = new Select(adultDropdown);
 			s.selectByValue(adult);
-			
-			String child = datatable.getCellData("Data", "Child", i).trim().substring(0, 1);
+
+			String child = datatable.getCellData("Data", "Child", i).trim()
+					.substring(0, 1);
 			System.out.println("Number of children are " + child);
-			
-			WebElement childDropdown = driver.findElementByXPath(prop.getProperty("child_xpath"));
-			Select ch = new Select (childDropdown);
+
+			WebElement childDropdown = driver.findElementByXPath(prop
+					.getProperty("child_xpath"));
+			Select ch = new Select(childDropdown);
 			ch.selectByValue(child);
 			
+			// Click on Find Flight button
+			
+			driver.findElementByXPath(prop.getProperty("findflight_xpath")).click();
+
 			Thread.sleep(5000);
 
-			 driver.quit();
-		
-		
-		}
-		
-			
-			
-			
-			
+			driver.quit();
 
 		}
 
 	}
 
+}
