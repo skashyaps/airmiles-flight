@@ -20,7 +20,7 @@ public class Book extends BaseTest {
 
 	public static void main(String[] args) throws IOException,
 			InterruptedException {
-
+	
 		// Read Properties files
 
 		Properties prop = new Properties();
@@ -42,7 +42,13 @@ public class Book extends BaseTest {
 		for (int i = 2; i <= 2; i++) {
 			ChromeDriver driver = new ChromeDriver();
 
+			driver.get(prop.getProperty("baseurl"));
+			driver.findElementByXPath(prop.getProperty("signin_xpath")).click();
+			driver.findElementByXPath(prop.getProperty("collector_xpath")).sendKeys("84034309802");
+			driver.findElementByXPath(prop.getProperty("pin_xpath")).sendKeys("2580");
+			driver.findElementByXPath(prop.getProperty("continue_xpath")).click();
 			driver.get(prop.getProperty("appurl"));
+			
 
 			// Opening Flight tabs
 
@@ -198,10 +204,10 @@ public class Book extends BaseTest {
 			// Click on Find Flight button
 			
 			driver.findElementByXPath(prop.getProperty("findflight_xpath")).click();
-
-			Thread.sleep(5000);
-
-			driver.quit();
+			
+			
+		
+			//driver.quit();
 
 		}
 
